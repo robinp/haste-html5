@@ -22,7 +22,7 @@ library
     Html5.Canvas.Ctx2D
 
   other-modules:
-    Html5.Callback  -- mostly copy-paste from haste-lib, not sure about its future 
+    Html5.Callback  
 
   build-depends:
     haste-lib ==0.1.*,

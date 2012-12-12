@@ -19,7 +19,23 @@ withImg img = do
 draw img = runReaderT $ do
   beginPath
   setFillStyleC "#aabb33"
-  rect 5 5 50 40
+  rect $ Rect 5 5 50 40
+  save
+  setFillStyleC "#ff0000"
+  restore
   fill
   closePath
-  drawImage 10 10 img
+  --
+  translate 240 160
+  mapM_ (gyik img) [i / 10.0 | i <- [1..10]]
+
+gyik :: Image -> Double -> ReaderT Ctx2D IO ()
+gyik img rot = do
+  save
+  alpha $ rot
+  rotate rot
+  let dx = - (imageW img `div` 2)
+  let dy = - (imageH img `div` 2)
+  translate dx dy
+  drawImage 0 0 img
+  restore
